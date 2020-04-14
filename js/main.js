@@ -22,7 +22,12 @@ $(document).ready(function () {
 
     $("#expand").click(function () {
         $("#section").empty();
-        const id = $("#input").val();
+        var str = $("#input").val();
+        var id = str;
+        if (str.includes('rel.ink')) {
+            var res = str.split("/");
+            id = res[res.length-1];
+        }
         $.get("https://rel.ink/api/links/" + id, function (data, status) {
             const expandedUrl = data.url;
             $("#section").append(`<p>Your expanded URL is &rarr;  <a id="expandedurl" target='_blank' href='${expandedUrl}'>${expandedUrl}</a></p>`);
